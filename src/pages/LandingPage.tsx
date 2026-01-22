@@ -7,23 +7,9 @@ export const LandingPage = () => {
     return (
         <div className="min-h-screen bg-background flex flex-col">
             {/* Header */}
-            <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-                <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <img src="/kadoshAI.png" alt="KadoshAI Logo" className="h-8 w-auto" />
-                        <span className="font-bold text-xl tracking-tight">JD Clarifier and Skills Extractor</span>
-                    </div>
-                    <nav className="flex items-center gap-4">
-                        <Link to="/login" className="text-sm font-medium hover:text-primary transition-colors">
-                            Login
-                        </Link>
-                        <Link
-                            to="/login"
-                            className="hidden sm:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                        >
-                            Get Started
-                        </Link>
-                    </nav>
+            <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-50">
+                <div className="container mx-auto px-4 h-16 flex items-center justify-center">
+                    <span className="font-extrabold text-2xl tracking-tight">JD Clarifier and Skills Extractor</span>
                 </div>
             </header>
 
@@ -98,27 +84,17 @@ export const LandingPage = () => {
                     </div>
                 </section>
 
-                {/* CTA Section */}
-                <section className="py-20">
-                    <div className="container mx-auto px-4">
-                        <div className="bg-primary text-primary-foreground rounded-2xl p-8 md:p-16 text-center relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:20px_20px] opacity-20"></div>
-                            <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-                                <h2 className="text-3xl md:text-4xl font-bold">Ready to streamline your hiring?</h2>
-                                <p className="text-primary-foreground/80 text-lg">
-                                    Join thousands of hiring managers who are writing better job descriptions in half the time.
-                                </p>
-                                <Link
-                                    to="/login"
-                                    className="inline-flex h-11 items-center justify-center rounded-md bg-background text-primary px-8 text-sm font-medium shadow hover:bg-background/90 transition-colors"
-                                >
-                                    Get Started for Free
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+
             </main>
+
+            {/* Footer */}
+            <footer className="border-t border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+                <div className="container mx-auto px-4 py-6 flex items-center justify-center gap-2">
+                    <span className="text-sm text-muted-foreground">Copyright © 2026</span>
+                    <img src="/kadoshAI.png" alt="Logo" className="h-5 w-auto" />
+                    <span className="text-sm text-muted-foreground">. All rights reserved.</span>
+                </div>
+            </footer>
         </div>
     )
 }

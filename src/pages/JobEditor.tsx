@@ -139,31 +139,34 @@ export function JobEditor() {
   }
 
   return (
-    <>
-      {/* Success Message */}
-      {successMessage && (
-        <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-start gap-3">
-          <Save className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
-          <div>
-            <h3 className="text-sm font-semibold text-green-800">Success</h3>
-            <p className="text-sm text-green-600 mt-1">{successMessage}</p>
-          </div>
-        </div>
-      )}
+    <div className="flex-1 flex flex-col min-h-0">
+      {/* Messages */}
+      {(successMessage || error) && (
+        <div className="shrink-0">
+          {successMessage && (
+            <div className="mb-4 bg-green-50 border border-green-200 rounded-lg p-4 flex items-start gap-3">
+              <Save className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+              <div>
+                <h3 className="text-sm font-semibold text-green-800">Success</h3>
+                <p className="text-sm text-green-600 mt-1">{successMessage}</p>
+              </div>
+            </div>
+          )}
 
-      {/* Error Message */}
-      {error && (
-        <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
-          <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
-          <div>
-            <h3 className="text-sm font-semibold text-red-800">Error</h3>
-            <p className="text-sm text-red-600 mt-1">{error}</p>
-          </div>
+          {error && (
+            <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+              <div>
+                <h3 className="text-sm font-semibold text-red-800">Error</h3>
+                <p className="text-sm text-red-600 mt-1">{error}</p>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
       {/* Title and Actions */}
-      <div className="mb-6 bg-white/90 backdrop-blur-sm rounded-lg shadow-md border border-slate-200 p-4">
+      <div className="mb-6 bg-white/90 backdrop-blur-sm rounded-lg shadow-md border border-slate-200 p-4 shrink-0">
         <div className="flex items-center gap-4">
           <input
             type="text"
@@ -200,9 +203,9 @@ export function JobEditor() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-0">
         {/* Left Column - Input */}
-        <div className="lg:col-span-4">
+        <div className="lg:col-span-4 h-full min-h-0">
           <InputSection
             jobData={jobData}
             setJobData={setJobData}
@@ -212,7 +215,7 @@ export function JobEditor() {
         </div>
 
         {/* Middle Column - Editor */}
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-5 h-full min-h-0">
           <EditorSection
             jobData={jobData}
             setJobData={setJobData}
@@ -220,13 +223,13 @@ export function JobEditor() {
         </div>
 
         {/* Right Column - Skills */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-3 h-full min-h-0">
           <SkillsSidebar
             jobData={jobData}
             setJobData={setJobData}
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }

@@ -83,8 +83,8 @@ export function MyJobs() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <div className="max-w-6xl mx-auto h-full flex flex-col min-h-0">
+      <div className="flex items-center justify-between mb-8 shrink-0">
         <button
           onClick={() => navigate('/')}
           className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
@@ -98,87 +98,89 @@ export function MyJobs() {
         </div>
       </div>
 
-      {jobs.length === 0 ? (
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-200 p-12 text-center">
-          <FileText className="h-16 w-16 text-slate-300 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-slate-800 mb-2">No job descriptions yet</h3>
-          <p className="text-slate-600 mb-6">Create your first job description to get started</p>
-          <button
-            onClick={() => navigate('/')}
-            className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all"
-          >
-            Create Job Description
-          </button>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-4">
-          {jobs.map((job) => (
-            <div
-              key={job.id}
-              className="bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-slate-200 p-6 hover:shadow-lg transition-all group"
+      <div className="flex-1 min-h-0 overflow-y-auto pr-2">
+        {jobs.length === 0 ? (
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-200 p-12 text-center">
+            <FileText className="h-16 w-16 text-slate-300 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-slate-800 mb-2">No job descriptions yet</h3>
+            <p className="text-slate-600 mb-6">Create your first job description to get started</p>
+            <button
+              onClick={() => navigate('/')}
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all"
             >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-semibold text-slate-800">
-                      {job.title || 'Untitled Job Description'}
-                    </h3>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(job.status)}`}>
-                      {job.status.replace('_', ' ')}
-                    </span>
-                  </div>
-
-                  <p className="text-slate-600 text-sm line-clamp-2 mb-4">{job.original_text}</p>
-
-                  <div className="flex items-center gap-6 text-sm text-slate-500">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{formatDate(job.updated_at)}</span>
+              Create Job Description
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-4 pb-6">
+            {jobs.map((job) => (
+              <div
+                key={job.id}
+                className="bg-white/90 backdrop-blur-sm rounded-xl shadow-md border border-slate-200 p-6 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-xl font-semibold text-slate-800">
+                        {job.title || 'Untitled Job Description'}
+                      </h3>
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(job.status)}`}>
+                        {job.status.replace('_', ' ')}
+                      </span>
                     </div>
-                    {(job.skills_must_have.length > 0 || job.skills_nice_to_have.length > 0) && (
-                      <div className="flex items-center gap-1">
-                        <Tag className="h-4 w-4" />
-                        <span>{job.skills_must_have.length + job.skills_nice_to_have.length} skills</span>
-                      </div>
-                    )}
-                    {job.tone && (
-                      <div className="text-xs bg-slate-100 px-2 py-1 rounded">
-                        {job.tone}
-                      </div>
-                    )}
-                  </div>
-                </div>
 
-                <div className="flex items-center gap-2 ml-4">
-                  {(job.status === 'draft' || job.status === 'rejected') && job.refined_text && (
+                    <p className="text-slate-600 text-sm line-clamp-2 mb-4">{job.original_text}</p>
+
+                    <div className="flex items-center gap-6 text-sm text-slate-500">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        <span>{formatDate(job.updated_at)}</span>
+                      </div>
+                      {(job.skills_must_have.length > 0 || job.skills_nice_to_have.length > 0) && (
+                        <div className="flex items-center gap-1">
+                          <Tag className="h-4 w-4" />
+                          <span>{job.skills_must_have.length + job.skills_nice_to_have.length} skills</span>
+                        </div>
+                      )}
+                      {job.tone && (
+                        <div className="text-xs bg-slate-100 px-2 py-1 rounded">
+                          {job.tone}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 ml-4">
+                    {(job.status === 'draft' || job.status === 'rejected') && job.refined_text && (
+                      <button
+                        onClick={() => handleSubmit(job)}
+                        className="p-2 bg-green-500 text-white hover:bg-green-600 rounded-lg transition-all shadow-sm hover:shadow-md"
+                        title="Submit for Approval"
+                      >
+                        <Send className="h-5 w-5" />
+                      </button>
+                    )}
                     <button
-                      onClick={() => handleSubmit(job)}
-                      className="p-2 bg-green-500 text-white hover:bg-green-600 rounded-lg transition-all shadow-sm hover:shadow-md"
-                      title="Submit for Approval"
+                      onClick={() => navigate(`/jobs/${job.id}`)}
+                      className="p-2 text-slate-600 hover:text-primary hover:bg-slate-100 rounded-lg transition-all"
+                      title="Edit"
                     >
-                      <Send className="h-5 w-5" />
+                      <Edit className="h-5 w-5" />
                     </button>
-                  )}
-                  <button
-                    onClick={() => navigate(`/jobs/${job.id}`)}
-                    className="p-2 text-slate-600 hover:text-primary hover:bg-slate-100 rounded-lg transition-all"
-                    title="Edit"
-                  >
-                    <Edit className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(job.id)}
-                    className="p-2 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
-                    title="Delete"
-                  >
-                    <Trash2 className="h-5 w-5" />
-                  </button>
+                    <button
+                      onClick={() => handleDelete(job.id)}
+                      className="p-2 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                      title="Delete"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

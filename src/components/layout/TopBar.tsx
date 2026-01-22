@@ -46,8 +46,6 @@ export function TopBar() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <img src="/kadoshAI.png" alt="kadoshAI" className="h-10 w-auto" />
-            <div className="h-8 w-px bg-slate-200 mx-1"></div>
             <h1 className="text-xl font-bold text-primary">
               JD Refine & Skills Extractor
             </h1>
